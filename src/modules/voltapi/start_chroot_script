@@ -1,0 +1,55 @@
+#!/usr/bin/env bash
+# <Script Name>
+# <Description what this module does>
+# Written by <Author>
+# GPL V3
+########
+
+# Source error handling, leave this in place
+set -x
+set -e
+
+export LC_ALL=C
+
+source /common.sh
+install_cleanup_trap
+
+unpack /filesystem/home/pi /home/pi pi
+unpack /filesystem/home/root /root root
+unpack /filesystem/boot /boot
+
+# Update OS
+apt-get update
+apt-get -y upgrade
+apt install -y openssh-server net-tools nginx git apt-transport-https lsb-release zip curl dirmngr sudo
+
+# MariaDB
+#curl -sS https://downloads.mariadb.com/MariaDB/mariadb_repo_setup | sudo bash
+#apt-get update
+#apt-get install mysql-server mysql-client
+
+# Install PHP (and related)
+wget -O /etc/apt/trusted.gpg.d/php.gpg https://packages.sury.org/php/apt.gpg
+echo "deb https://packages.sury.org/php/ $(lsb_release -sc) main" | sudo tee /etc/apt/sources.list.d/php7.3.list
+apt-get update
+apt-get install -y php7.3-cli php7.3-fpm php7.3-intl php7.3-json php7.3-mbstring php7.3-xml php7.3-curl php7.3-bcmath php7.3-zip php7.3-sqlite
+
+curl -sS https://getcomposer.org/installer | sudo php -- --install-dir=/usr/local/bin --filename=composer
+
+# Install Volta
+# git clone [volta_repos]
+mkdir -p /var/www/volta/public
+echo "<?php phpinfo();" | sudo tee /var/www/volta/public/index.php
+
+usermod -aG www-data pi
+chown -R www-data:www-data /var/www/volta
+find /var/www/volta -type d -exec chmod 2775 {} \;
+find /var/www/volta -type f -exec chmod 0664 {} \;
+
+# Unpack root at the end, so files are modified before
+unpack /filesystem/root /
+
+# Cleanup
+apt-get clean
+apt-get autoremove -y
+
