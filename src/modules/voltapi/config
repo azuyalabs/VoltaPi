@@ -1,1 +1,6 @@
-VOLTA_VAR="This is a module variable"
+# All the configuration variables must start with VOLTAPI_
+
+[ -n "$VOLTAPI_HTTPD_BASE_DIR" ] || VOLTAPI_HTTPD_BASE_DIR=/var/www/volta
+[ -n "$VOLTAPI_HTTPD_DOCUMENT_ROOT" ] || VOLTAPI_HTTPD_DOCUMENT_ROOT=/var/www/volta/public
+
+[ -n "$VOLTAPI_OS_USER" ] || VOLTAPI_OS_USER=pi

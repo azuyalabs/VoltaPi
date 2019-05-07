@@ -14,7 +14,7 @@ export LC_ALL=C
 source /common.sh
 install_cleanup_trap
 
-unpack /filesystem/home/pi /home/pi pi
+unpack /filesystem/home/$VOLTAPI_OS_USER /home/$VOLTAPI_OS_USER $VOLTAPI_OS_USER
 unpack /filesystem/home/root /root root
 unpack /filesystem/boot /boot
 
@@ -23,10 +23,9 @@ apt-get update
 apt-get -y upgrade
 apt install -y openssh-server net-tools nginx git apt-transport-https lsb-release zip curl dirmngr sudo
 
-# MariaDB
-#curl -sS https://downloads.mariadb.com/MariaDB/mariadb_repo_setup | sudo bash
-#apt-get update
-#apt-get install mysql-server mysql-client
+# Configuration
+usermod -aG www-data $VOLTAPI_OS_USER
+usermod -aG sudo $VOLTAPI_OS_USER
 
 # Install PHP (and related)
 wget -O /etc/apt/trusted.gpg.d/php.gpg https://packages.sury.org/php/apt.gpg
@@ -38,13 +37,13 @@ curl -sS https://getcomposer.org/installer | sudo php -- --install-dir=/usr/loca
 
 # Install Volta
 # git clone [volta_repos]
-mkdir -p /var/www/volta/public
-echo "<?php phpinfo();" | sudo tee /var/www/volta/public/index.php
+mkdir -p "$VOLTAPI_HTTPD_DOCUMENT_ROOT"
+echo "<?php phpinfo();" | sudo tee "$VOLTAPI_HTTPD_DOCUMENT_ROOT/index.php"
 
 usermod -aG www-data pi
-chown -R www-data:www-data /var/www/volta
-find /var/www/volta -type d -exec chmod 2775 {} \;
-find /var/www/volta -type f -exec chmod 0664 {} \;
+chown -R www-data:www-data "$VOLTAPI_HTTPD_BASE_DIR"
+find "$VOLTAPI_HTTPD_BASE_DIR" -type d -exec chmod 2775 {} \;
+find "$VOLTAPI_HTTPD_BASE_DIR" -type f -exec chmod 0664 {} \;
 
 # Unpack root at the end, so files are modified before
 unpack /filesystem/root /
