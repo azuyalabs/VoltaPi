@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
-# <Script Name>
-# <Description what this module does>
-# Written by <Author>
+# VoltaPi generation script
+# Shell script that runs in a Raspbian chroot to create the VoltaPi distro.
+# Written by Sacha Telgenhof <me at sachatelgenhof dot com>
 # GPL V3
 ########
 
@@ -45,7 +45,7 @@ chown -R www-data:www-data "$VOLTAPI_HTTPD_BASE_DIR"
 find "$VOLTAPI_HTTPD_BASE_DIR" -type d -exec chmod 2775 {} \;
 find "$VOLTAPI_HTTPD_BASE_DIR" -type f -exec chmod 0664 {} \;
 
-# Add a welcome text to upon login
+# Add a welcome text upon terminal login
 echo "source /home/$VOLTAPI_OS_USER/scripts/welcome" >> /home/$VOLTAPI_OS_USER/.bashrc
 
 # Unpack root at the end, so files are modified before
@@ -54,4 +54,3 @@ unpack /filesystem/root /
 # Cleanup
 apt-get clean
 apt-get autoremove -y
-
