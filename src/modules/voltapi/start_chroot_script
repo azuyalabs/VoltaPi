@@ -45,6 +45,9 @@ chown -R www-data:www-data "$VOLTAPI_HTTPD_BASE_DIR"
 find "$VOLTAPI_HTTPD_BASE_DIR" -type d -exec chmod 2775 {} \;
 find "$VOLTAPI_HTTPD_BASE_DIR" -type f -exec chmod 0664 {} \;
 
+# Add a welcome text to upon login
+echo "source /home/$VOLTAPI_OS_USER/scripts/welcome" >> /home/$VOLTAPI_OS_USER/.bashrc
+
 # Unpack root at the end, so files are modified before
 unpack /filesystem/root /
 

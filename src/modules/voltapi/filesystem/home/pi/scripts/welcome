@@ -1,0 +1,47 @@
+#!/bin/bash
+
+_NAME=$(hostname)
+_IP=$(hostname -I)
+_VOLTA_VERSION="??"
+_VOLTAPI_VERSION=$(cat /etc/voltapi_version || echo "unknown")
+
+echo
+echo "------------------------------------------------------------------------"
+echo "Access Volta from a web browser on your network by navigating to any of:"
+echo
+
+for name in $_NAME;
+do
+    echo "    http://$name.local"
+done
+
+for ip in $_IP;
+do
+    if [[ $ip =~ .*:.* ]]
+    then
+       echo "    http://[$ip]"
+    else
+       echo "    http://$ip"
+    fi
+done
+
+echo
+#echo "https is also available, with a self-signed certificate."
+
+if ! which lightdm 2>&1 >/dev/null;
+then
+    echo "--------------------------------------------------------------------------"
+    echo "This image comes without a desktop environment installed because it's not "
+    echo "required for running Volta. If you want a desktop environment you can "
+    echo "install it via"
+    echo
+    echo "    sudo /home/pi/scripts/install-desktop"
+    echo
+fi
+
+echo "-------------------------------------------"
+echo "Volta version   : $_VOLTA_VERSION"
+echo "VoltaPi version : $_VOLTAPI_VERSION"
+echo "-------------------------------------------"
+echo
+
