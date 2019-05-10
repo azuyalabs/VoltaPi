@@ -44,4 +44,3 @@ echo "Volta version   : $_VOLTA_VERSION"
 echo "VoltaPi version : $_VOLTAPI_VERSION"
 echo "-------------------------------------------"
 echo
-
