@@ -36,14 +36,19 @@ apt-get install -y php7.3-cli php7.3-fpm php7.3-intl php7.3-json php7.3-mbstring
 curl -sS https://getcomposer.org/installer | sudo php -- --install-dir=/usr/local/bin --filename=composer
 
 # Install Volta
+echo "--- Installing Volta"
 # git clone [volta_repos]
 mkdir -p "$VOLTAPI_HTTPD_DOCUMENT_ROOT"
 echo "<?php phpinfo();" | sudo tee "$VOLTAPI_HTTPD_DOCUMENT_ROOT/index.php"
 
-usermod -aG www-data pi
+usermod -aG www-data $VOLTAPI_OS_USER
 chown -R www-data:www-data "$VOLTAPI_HTTPD_BASE_DIR"
 find "$VOLTAPI_HTTPD_BASE_DIR" -type d -exec chmod 2775 {} \;
 find "$VOLTAPI_HTTPD_BASE_DIR" -type f -exec chmod 0664 {} \;
+
+rm /etc/nginx/sites-enabled/default
+ln -s /etc/nginx/sites-available/volta /etc/nginx/sites-enabled/
+systemctl reload nginx
 
 # Add a welcome text upon terminal login
 echo "source /home/$VOLTAPI_OS_USER/scripts/welcome" >> /home/$VOLTAPI_OS_USER/.bashrc
