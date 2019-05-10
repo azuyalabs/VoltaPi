@@ -1,3 +1,5 @@
+#
+#
 server {
     listen 80 default_server;
     listen [::]:80 default_server;
@@ -18,7 +20,7 @@ server {
     location ~ \.php$ {
         try_files $uri =404;
         fastcgi_split_path_info ^(.+\.php)(/.+)$;
-        fastcgi_pass unix:/run/php/php7.3-fpm.sock;
+        fastcgi_pass unix:/run/php/php7.3-fpm-volta.sock;
         fastcgi_index index.php;
         fastcgi_param SCRIPT_FILENAME $document_root/$fastcgi_script_name;
         include fastcgi_params;
