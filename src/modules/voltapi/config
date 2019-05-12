@@ -16,6 +16,5 @@
 [ -n "$VOLTAPI_HTTPD_DOCUMENT_ROOT" ] || VOLTAPI_HTTPD_DOCUMENT_ROOT=/var/www/volta/public
 
 # Volta Repository & branch
-[ -n "$VOLTAPI_VOLTA_REPO_SHIP" ] || VOLTAPI_VOLTA_REPO_SHIP=https://github.com/azuyalabs/Volta.git
-[ -n "$VOLTAPI_VOLTA_REPO_BUILD" ] || VOLTAPI_VOLTA_REPO_BUILD=
+[ -n "$VOLTAPI_VOLTA_REPO" ] || VOLTAPI_VOLTA_REPO=https://github.com/azuyalabs/Volta.git
 [ -n "$VOLTAPI_VOLTA_REPO_BRANCH" ] || VOLTAPI_VOLTA_REPO_BRANCH=develop
