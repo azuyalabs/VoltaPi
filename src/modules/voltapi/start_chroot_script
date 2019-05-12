@@ -44,9 +44,7 @@ curl -sS https://getcomposer.org/installer | sudo php -- --install-dir=/usr/loca
 
 # Install Volta
 echo "--- Installing Volta"
-# git clone [volta_repos]
-mkdir -p "$VOLTAPI_HTTPD_DOCUMENT_ROOT"
-echo "<?php phpinfo();" | sudo tee "$VOLTAPI_HTTPD_DOCUMENT_ROOT/index.php"
+gitclone VOLTAPI_VOLTA_REPO $VOLTAPI_HTTPD_BASE_DIR
 
 usermod -aG www-data $VOLTAPI_OS_USER
 chown -R www-data:www-data "$VOLTAPI_HTTPD_BASE_DIR"
