@@ -49,10 +49,6 @@ pushd $VOLTAPI_HTTPD_BASE_DIR
     composer install
     cp .env.example .env
 
-    pushd database
-        touch volta.sqlite
-    popd
-
     php artisan key:generate
     php artisan migrate
  popd
