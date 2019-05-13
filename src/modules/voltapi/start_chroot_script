@@ -48,7 +48,13 @@ git clone -u pi -b $VOLTAPI_VOLTA_REPO_BRANCH $VOLTAPI_VOLTA_REPO $VOLTAPI_HTTPD
 pushd $VOLTAPI_HTTPD_BASE_DIR
     composer install
     cp .env.example .env
+
+    pushd database
+        touch volta.sqlite
+    popd
+
     php artisan key:generate
+    php artisan migrate
  popd
 
 usermod -aG www-data $VOLTAPI_OS_USER
