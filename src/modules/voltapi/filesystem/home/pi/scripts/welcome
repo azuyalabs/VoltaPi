@@ -11,7 +11,7 @@
 
 _NAME=$(hostname)
 _IP=$(hostname -I)
-_VOLTA_VERSION="??"
+_VOLTA_VERSION=$(grep -E '^\s+const VERSION = ' /var/www/volta/app/Volta.php | awk '{print $4}' | sed "s/'//g; s/;//g")
 _VOLTAPI_VERSION=$(cat /etc/voltapi_version || echo "unknown")
 
 echo
