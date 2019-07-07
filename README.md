@@ -14,7 +14,7 @@ At the moment Volta is still in a very early stage of development, so no officia
 4. Log into your Pi via SSH (it is located at `volta.local` [if your computer supports bonjour](https://learn.adafruit.com/bonjour-zeroconf-networking-for-windows-and-linux/overview) or the IP address assigned by your router), default username is "pi", default password is "raspberry". Run sudo raspi-config. Once that is open:
     - Change the password via "Change User Password"
     - Optionally: Change the configured timezone via "Localization Options" > "Timezone".
-    - Optionally: Change the hostname via "Network Options" > "Hostname". Your OctoPi instance will then no longer be reachable under `octopi.local` but rather the hostname you chose postfixed with .local, so keep that in mind.
+    - Optionally: Change the hostname via "Network Options" > "Hostname". Your Volta instance will then no longer be reachable under `volta.local` but rather the hostname you chose postfixed with .local, so keep that in mind.
   You can navigate in the menus using the arrow keys and Enter. To switch to selecting the buttons at the bottom use Tab.
 
   You do not need to expand the filesystem, current versions of OctoPi do this automatically.
