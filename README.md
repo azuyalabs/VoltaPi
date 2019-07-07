@@ -3,6 +3,8 @@ A Raspberry Pi distribution for Volta. It includes the Volta application install
 
 This repository contains the source script to generate the distribution out of an existing Raspbian distro image.
 
+!! This distribution is still in development and should not be used in Production !!
+
 ## Where to get it?
 At the moment Volta is still in a very early stage of development, so no official releases are made yet. However a first 'alpha' edition of the image can be downloaded [here](http://volta.azuya.studio/voltapi-stretch-lite-0.1.0.zip)
 
