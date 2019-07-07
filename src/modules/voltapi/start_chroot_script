@@ -54,6 +54,7 @@ pushd $VOLTAPI_HTTPD_BASE_DIR
     cp .env.example .env
 
     php artisan key:generate
+    php artisan passport:key
     php artisan migrate
 popd
 
