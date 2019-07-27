@@ -13,7 +13,7 @@ At the moment Volta is still in a very early stage of development, so no officia
 1. Unzip the image and install it to an SD card like any other Raspberry Pi image.
 2. Configure your WiFi by editing the `volta-wpa-supplicant.txt` file on the root of the flashed card when using it like a thumb drive.
 3. Boot the Pi from the card
-4. Log into your Pi via SSH (it is located at `volta.local` [if your computer supports bonjour](https://learn.adafruit.com/bonjour-zeroconf-networking-for-windows-and-linux/overview) or the IP address assigned by your router), default username is "pi", default password is "raspberry". Run sudo raspi-config. Once that is open:
+4. Log into your Pi via SSH (it is located at `voltapi.local` [if your computer supports bonjour](https://learn.adafruit.com/bonjour-zeroconf-networking-for-windows-and-linux/overview) or the IP address assigned by your router), default username is "pi", default password is "raspberry". Run sudo raspi-config. Once that is open:
     - Change the password via "Change User Password"
     - Optionally: Change the configured timezone via "Localization Options" > "Timezone".
     - Optionally: Change the hostname via "Network Options" > "Hostname". Your Volta instance will then no longer be reachable under `volta.local` but rather the hostname you chose postfixed with .local, so keep that in mind.
