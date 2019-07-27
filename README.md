@@ -19,7 +19,7 @@ At the moment Volta is still in a very early stage of development, so no officia
     - Optionally: Change the hostname via "Network Options" > "Hostname". Your Volta instance will then no longer be reachable under `voltapi.local` but rather the hostname you chose postfixed with .local, so keep that in mind.
   You can navigate in the menus using the arrow keys and Enter. To switch to selecting the buttons at the bottom use Tab.
 
-  You do not need to expand the filesystem, current versions of OctoPi do this automatically.
+  You do not need to expand the filesystem, current versions of VoltaPi do this automatically.
 
 Volta is located at http://voltapi.local. 
 
