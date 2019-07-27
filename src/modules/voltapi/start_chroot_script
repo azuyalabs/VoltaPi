@@ -57,9 +57,8 @@ popd
 
 # Set file ownership and permissions
 chown -R $VOLTAPI_OS_USER:$VOLTAPI_WEBSERVER_USER "$VOLTAPI_HTTPD_BASE_DIR"
-find "$VOLTAPI_HTTPD_BASE_DIR" -type f -not -path "$VOLTAPI_HTTPD_BASE_DIR/vendor/*" -exec chmod 0664 {} \;    
+find "$VOLTAPI_HTTPD_BASE_DIR" -type f -exec chmod 0664 {} \;    
 find "$VOLTAPI_HTTPD_BASE_DIR" -type d -exec chmod 2775 {} \;
-chown -R $VOLTAPI_WEBSERVER_USER:$VOLTAPI_WEBSERVER_USER "$VOLTAPI_HTTPD_BASE_DIR"
 
 sudo chgrp -R $VOLTAPI_WEBSERVER_USER "$VOLTAPI_HTTPD_BASE_DIR/storage" "$VOLTAPI_HTTPD_BASE_DIR/bootstrap/cache"
 sudo chmod -R ug+rwx "$VOLTAPI_HTTPD_BASE_DIR/storage" "$VOLTAPI_HTTPD_BASE_DIR/bootstrap/cache"
