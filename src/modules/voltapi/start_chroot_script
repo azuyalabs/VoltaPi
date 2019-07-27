@@ -46,10 +46,8 @@ curl -sS https://getcomposer.org/installer | sudo php -- --install-dir=/usr/loca
 echo "--- Installing Volta"
 git clone -u pi -b $VOLTAPI_VOLTA_REPO_BRANCH $VOLTAPI_VOLTA_REPO $VOLTAPI_HTTPD_BASE_DIR
 
-find "$VOLTAPI_HTTPD_BASE_DIR" -type f -exec chmod 0664 {} \;
-
 pushd $VOLTAPI_HTTPD_BASE_DIR
-    composer install
+    composer install --no-ansi --no-dev --no-interaction --no-progress --no-scripts --optimize-autoloader
     cp .env.example .env
 
     php artisan key:generate
@@ -57,10 +55,16 @@ pushd $VOLTAPI_HTTPD_BASE_DIR
     php artisan migrate
 popd
 
+# Set file ownership and permissions
+chown -R $VOLTAPI_OS_USER:$VOLTAPI_WEBSERVER_USER "$VOLTAPI_HTTPD_BASE_DIR"
+find "$VOLTAPI_HTTPD_BASE_DIR" -type f -not -path "$VOLTAPI_HTTPD_BASE_DIR/vendor/*" -exec chmod 0664 {} \;    
 find "$VOLTAPI_HTTPD_BASE_DIR" -type d -exec chmod 2775 {} \;
+chown -R $VOLTAPI_WEBSERVER_USER:$VOLTAPI_WEBSERVER_USER "$VOLTAPI_HTTPD_BASE_DIR"
 
-usermod -aG www-data $VOLTAPI_OS_USER
-chown -R www-data:www-data "$VOLTAPI_HTTPD_BASE_DIR"
+sudo chgrp -R $VOLTAPI_WEBSERVER_USER storage bootstrap/cache
+sudo chmod -R ug+rwx storage bootstrap/cache
+
+usermod -aG $VOLTAPI_WEBSERVER_USER $VOLTAPI_OS_USER
 
 # Activate Volta on Nginx
 rm /etc/nginx/sites-enabled/default
