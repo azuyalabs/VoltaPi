@@ -46,7 +46,6 @@ curl -sS https://getcomposer.org/installer | sudo php -- --install-dir=/usr/loca
 echo "--- Installing Volta"
 git clone -u pi -b $VOLTAPI_VOLTA_REPO_BRANCH $VOLTAPI_VOLTA_REPO $VOLTAPI_HTTPD_BASE_DIR
 
-find "$VOLTAPI_HTTPD_BASE_DIR" -type d -exec chmod 2775 {} \;
 find "$VOLTAPI_HTTPD_BASE_DIR" -type f -exec chmod 0664 {} \;
 
 pushd $VOLTAPI_HTTPD_BASE_DIR
@@ -57,6 +56,8 @@ pushd $VOLTAPI_HTTPD_BASE_DIR
     php artisan passport:key
     php artisan migrate
 popd
+
+find "$VOLTAPI_HTTPD_BASE_DIR" -type d -exec chmod 2775 {} \;
 
 usermod -aG www-data $VOLTAPI_OS_USER
 chown -R www-data:www-data "$VOLTAPI_HTTPD_BASE_DIR"
